@@ -83,4 +83,22 @@ finalRDD.collect()
 
 // COMMAND ----------
 
+for((x,y)<-finalRDD.collect()) println(x+"--->"+y)
+
+// COMMAND ----------
+
+finalRDD.saveAsTextFile("finaloutput.csv")
+
+// COMMAND ----------
+
+// DBTITLE 1,part2:maximum no. of friends for each age
+val newmap=removedheader.map(line=>(line.split(",")(2).toInt,line.split(",")(3).toInt))
+
+// COMMAND ----------
+
+val largestvalue=newmap.reduceByKey(math.max(_, _))
+largestvalue.collect()
+
+// COMMAND ----------
+
 
